@@ -5,8 +5,6 @@ import { BIG_MODE, MINI_MODE } from "./calendarType/calendarType";
 import Header from "./header/Header";
 import Days from "./days/Days";
 import Cell from "./cell/Cell";
-import { useEffect } from "react";
-import getHolidaysFrom2000To2050 from "./utility/api/holiday.axios";
 
 const Calendar = ({ mode, children, page }: CalendarType) => {
   const calendarClasses = clsx({
@@ -22,11 +20,6 @@ const Calendar = ({ mode, children, page }: CalendarType) => {
     [styles["big-body-wrapper"]]: mode === BIG_MODE,
   });
 
-  useEffect(() => {
-    // getHolidaysFrom2000To2050().then((result) => {
-    //   console.log(result);
-    // });
-  }, []);
   return (
     <div className={calendarClasses}>
       <div className={headerWrapperClasses}>

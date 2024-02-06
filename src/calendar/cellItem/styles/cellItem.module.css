@@ -81,21 +81,6 @@
   border: 1px solid #7433ff;
 }
 
-.status-holiday {
-  position: relative;
-}
-
-.status-holiday::after {
-  content: "";
-  position: absolute;
-  top: 0.5rem;
-  left: 2.5rem;
-  width: 0.4rem;
-  height: 0.4rem;
-  border-radius: 50%;
-  background-color: #ff5656;
-}
-
 /* sales/calendar의 cellItem의 기본 일자 css*/
 .big-calendar-base {
   font-size: 2rem;
@@ -155,11 +140,6 @@
   opacity: 0.5;
 }
 
-.holiday {
-  color: var(--red, #ff5656);
-  font-size: 1.2rem;
-  font-weight: 500;
-}
 @media screen and (max-width: 1520px) {
   .calendar-base {
     height: 10vh;

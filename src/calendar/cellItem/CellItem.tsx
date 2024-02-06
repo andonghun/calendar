@@ -22,9 +22,8 @@ type Cell = (param: CellItemProps) => JSX.Element;
 
 const CellItem: Cell = ({ day, selectDayHandler, mode, page }) => {
   const SELECTED_DAY = "SELECTEDTYPE";
-  const HOLIDAY = "HOLIDAY";
   const currentDate = useCalendarState((staet) => staet.currentDate);
-  const selectedDate = useDayState((state) => state.selectedDate);
+  const { selectedDate, today } = useDayState();
 
   const statusVariant = cva([styles["mini-calendar-base"]], {
     variants: {
@@ -40,9 +39,6 @@ const CellItem: Cell = ({ day, selectDayHandler, mode, page }) => {
         PREV: styles["mini-prev-date"],
         CURRENT: styles["mini-current-date"],
         AFTER: styles["mini-after-date"],
-      },
-      holidayType: {
-        HOLIDAY: styles["status-holiday"],
       },
     },
   });
@@ -86,12 +82,14 @@ const CellItem: Cell = ({ day, selectDayHandler, mode, page }) => {
             calendarType: getStatusCalendarType(day, currentDate),
             monthType: getStatusMonthType(currentDate, day),
             dateType: getStatusDateType(day),
-            //   holidayType: holiday?.[0]?.name ? HOLIDAY : null,
           })}
           /** 페이지가 주문내역 확인이면 아래와 같이 하면 됩니다.
            *{...((page===ORDER && {onClick: clickHandler}))}
            */
-          onClick={selectDayHandler?.(day)}
+          {...(((mode === MINI_MODE && day.isSame(today, "D")) ||
+            day.isBefore(today, "D")) && {
+            onClick: selectDayHandler?.(day),
+          })}
         >
           <span
             className={statusDayVariant({
@@ -116,7 +114,6 @@ const CellItem: Cell = ({ day, selectDayHandler, mode, page }) => {
           )}
         >
           <p> {formatDate}</p>
-          {/* <p className={styles.holiday}>{holiday?.[0]?.name ?? null}</p> */}
         </div>
       )}
     </>
